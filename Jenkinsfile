@@ -76,7 +76,7 @@ pipeline{
                 New-Item -ItemType Directory -Force -Path publish | Out-Null
 
                 # activate virtual environment and create deployment package
-                & .\\env:VENV_NAME\\Scripts\\Activate.ps1
+                & .\\$env:VENV_NAME\\Scripts\\Activate.ps1
 
                 # Create a zip file of the application
                 Compress-Archive -Path .\\* -DestinationPath publish\\app.zip -Force
