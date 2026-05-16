@@ -32,7 +32,7 @@ pipeline{
                 python -m venv $env:VENV_NAME
 
                 # activate virtual environment and install dependencies
-                .\\$env:VENV_NAME\\Scripts\\Activate.ps1
+                & .\\$env:VENV_NAME\\Scripts\\Activate.ps1
                 pip install --upgrade pip
                 pip install -r requirements.txt
 
@@ -47,7 +47,7 @@ pipeline{
             steps{
                 powershell '''
                 # activate virtual environment and run tests
-                .\\$env:VENV_NAME\\Scripts\\Activate.ps1
+                & .\\$env:VENV_NAME\\Scripts\\Activate.ps1
                 Write-Host "Running tests..."
                 python -m pytest --junitxml=test-results.xml --cov=. --cov-report=xml
                 '''
@@ -62,7 +62,7 @@ pipeline{
             steps{
                 powershell '''
                 # activate virtual environment and run code quality checks
-                .\\$env:VENV_NAME\\Scripts\\Activate.ps1
+                & .\\$env:VENV_NAME\\Scripts\\Activate.ps1
                 Write-Host "Running code quality checks..."
                 python -m pylint --exit-zero **/*.py > pylint-report.txt
                 python -m flake8 --exit-zero **/*.py > flake8-report.txt
